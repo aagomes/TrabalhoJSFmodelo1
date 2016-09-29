@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.servlets;
 
+import br.edu.ifsul.dao.EspecialidadeDAO;
+import br.edu.ifsul.modelo.Especialidade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author alexandre
+ * @author jorge
  */
-@WebServlet(name = "ServletEspecialidade", urlPatterns = {"/Especialidade/ServletEspecialidade"})
+@WebServlet(name = "ServletEspecialidade", urlPatterns = {"/especialidade/ServletEspecialidade"})
 public class ServletEspecialidade extends HttpServlet {
 
     /**
@@ -31,22 +28,61 @@ public class ServletEspecialidade extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String nome = request.getParameter("nome");
-                        
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletEspecialidade</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Dados Enviados</h1>");
-            out.println("<h1>Nome: "+nome+ "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        // capturando o dao da sessao
+        EspecialidadeDAO dao = (EspecialidadeDAO) request.getSession().getAttribute("especialidadeDAO");
+        if (dao == null){ // caso o dao seja nulo (primeiro acesso) deve inicializa-lo
+            dao = new EspecialidadeDAO();
         }
+        String tela = ""; // atributo que ira conter a tela que será direcionada
+        String acao = request.getParameter("acao"); // ação solicitada
+        if (acao == null){
+            tela = "listar.jsp";
+        } else if (acao.equals("incluir")){
+            dao.setObjetoSelecionado(new Especialidade());
+            tela = "formulario.jsp";
+        } else if (acao.equals("alterar")){
+            // carregar o objeto pelo id
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Especialidade obj = dao.localizar(id);
+            if (obj != null){
+                dao.setObjetoSelecionado(obj);
+                dao.setMensagem("");
+                tela = "formulario.jsp";
+            }            
+        } else if (acao.equals("excluir")){
+            // carregar o objeto pelo id
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            Especialidade obj = dao.localizar(id);
+            if (obj != null){
+                dao.remover(obj);
+                tela = "listar.jsp";
+            }             
+        } else if (acao.equals("salvar")){
+            Integer id = null;
+            try {
+                id = Integer.parseInt(request.getParameter("id"));
+            } catch(Exception e){
+                System.out.println("Erro ao converter o id");
+            }
+            Especialidade obj = new Especialidade();
+            obj.setId(id);
+            obj.setNome(request.getParameter("nome"));
+            dao.setObjetoSelecionado(obj);
+            if (dao.validaObjeto(obj)){
+                dao.salvar(obj);
+                tela = "listar.jsp";
+            } else {
+                tela = "formulario.jsp";
+            }                        
+        } else if (acao.equals("cancelar")){
+            tela = "listar.jsp";
+            dao.setMensagem("");
+        }
+        // atualizar o dao na sessão
+        request.getSession().setAttribute("especialidadeDAO", dao);
+        // redireciona para a tela
+        response.sendRedirect(tela);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

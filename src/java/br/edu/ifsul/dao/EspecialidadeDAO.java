@@ -46,7 +46,7 @@ public class EspecialidadeDAO implements Serializable{
     }
     public List<Especialidade> getLista(){
         /// consultando e retornando um entidade persistente        
-        return em.createQuery("from especialidade order by nome").getResultList();
+        return em.createQuery("from Especialidade order by nome").getResultList();
     }
     
     public boolean salvar(Especialidade obj){
