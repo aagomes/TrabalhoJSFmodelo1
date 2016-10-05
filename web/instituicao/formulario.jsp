@@ -29,7 +29,7 @@
         <h2>Edição de Instituicao</h2>
         <h2><%=instituicaoDAO.getMensagem()%></h2>
         <form name="form" id="form" action="ServletInstituicao" method="POST">
-            <% SimpleDateFormat dateFormat= new SimpleDateFormat("dd/MM/yyyy");%>
+            
             Nome:  <input type="text" name="nome" id="nome"
                            value="<%= instituicaoDAO.getObjetoSelecionado().getNome() == null
                            ? "" : instituicaoDAO.getObjetoSelecionado().getNome() %>"

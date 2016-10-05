@@ -35,12 +35,12 @@
                            size="40" /><br/>
             Email:  <input type="text" name="email" id="email"
                            value="<%= alunoDAO.getObjetoSelecionado().getEmail()== null
-                           ? "" : alunoDAO.getObjetoSelecionado().getEmail()%>"
+                           ? "" : alunoDAO.getObjetoSelecionado().getEmail() %>"
                            size="40" /><br/>
-            Nascimento:  <input type="text" name="nascimento" id="nascimento"
+            Nascimento:  <input type="date" name="nascimento" id="nascimento"
                            value="<%= alunoDAO.getObjetoSelecionado().getNascimento()== null
-                           ? "" : alunoDAO.getObjetoSelecionado().getNascimento()%>"
-                           /><br/>
+                           ? "" : alunoDAO.getObjetoSelecionado().getNascimento() %>"
+                           size="40" /><br/>
             
             <input type="button" value="Salvar" name="btnSalvar" onclick="doSalvar()"/> 
             <input type="button" value="Cancelar" name="btnCancelar" onclick="doCancelar()"/>

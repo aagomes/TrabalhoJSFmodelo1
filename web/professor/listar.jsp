@@ -23,6 +23,7 @@
         <table border="1">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Titulacao</th>
                     <th>Topicos Interesse</th>
                     <th>Alterar</th>
@@ -34,10 +35,11 @@
                   for(Professor p :professorDAO.getLista() )  {
                 %>  
                 <tr>
+                    <td><%=p.getId()%></td>
                     <td><%=p.getTitulacao()%></td>
                     <td><%=p.getTopicosInteresse()%></td>
-                    <td><a href="ServletProfessor?acao=alterar&id=<%=p.getTitulacao()%>">Alterar</a></td>
-                    <td><a href="ServletProfessor?acao=excluir&id=<%=p.getTitulacao()%>">Excluir</a></td>
+                    <td><a href="ServletProfessor?acao=alterar&id=<%=p.getId()%>">Alterar</a></td>
+                    <td><a href="ServletProfessor?acao=excluir&id=<%=p.getId()%>">Excluir</a></td>
                 </tr>
                 <%
                     }

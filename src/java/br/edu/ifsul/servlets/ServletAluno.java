@@ -4,6 +4,7 @@ import br.edu.ifsul.dao.AlunoDAO;
 import br.edu.ifsul.modelo.Aluno;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,6 +68,8 @@ public class ServletAluno extends HttpServlet {
             Aluno obj = new Aluno();
             obj.setId(id);
             obj.setNome(request.getParameter("nome"));
+            obj.setEmail(request.getParameter("email"));
+            obj.setNascimento(Calendar.getInstance());
             dao.setObjetoSelecionado(obj);
             if (dao.validaObjeto(obj)){
                 dao.salvar(obj);
