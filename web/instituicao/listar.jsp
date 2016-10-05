@@ -34,15 +34,15 @@
             </thead>
             <tbody>
                 <%
-                  for(Instituicao e :instituicaoDAO.getLista() )  {
+                  for(Instituicao i :instituicaoDAO.getLista() )  {
                       
                 %>  
                 <tr>
-                    <td><%=e.getId()%></td>
-                    <td><%=e.getNome()%></td>
-                    <td><%=e.getAnoFundacao()%></td>
-                    <td><a href="ServletInstituicao?acao=alterar&id=<%=e.getId()%>">Alterar</a></td>
-                    <td><a href="ServletInstituicao?acao=excluir&id=<%=e.getId()%>">Excluir</a></td>
+                    <td><%=i.getId()%></td>
+                    <td><%=i.getNome()%></td>
+                    <td><%=i.getAnoFundacao()%></td>
+                    <td><a href="ServletInstituicao?acao=alterar&id=<%=i.getId()%>">Alterar</a></td>
+                    <td><a href="ServletInstituicao?acao=excluir&id=<%=i.getId()%>">Excluir</a></td>
                 </tr>
                 <%
                     }

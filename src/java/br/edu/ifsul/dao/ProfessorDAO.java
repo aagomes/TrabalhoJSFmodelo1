@@ -46,7 +46,7 @@ public class ProfessorDAO implements Serializable{
     }
     public List<Professor> getLista(){
         /// consultando e retornando um entidade persistente        
-        return em.createQuery("from Professor order by nome").getResultList();
+        return em.createQuery("from Professor order by titulacao").getResultList();
     }
     
     public boolean salvar(Professor obj){

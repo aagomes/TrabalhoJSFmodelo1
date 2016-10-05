@@ -6,7 +6,7 @@
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.jpa.EntityManagerUtil;
-import br.edu.ifsul.modelo.Especialidade;
+import br.edu.ifsul.modelo.Aluno;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import java.util.List;
@@ -21,22 +21,22 @@ import javax.validation.Validator;
  * @author alexandre
  */
 public class AlunoDAO implements Serializable{
-    private Especialidade objetoSelecionado;// atributo que armazena o objeto que está sendo incluido/editado
+    private Aluno objetoSelecionado;// atributo que armazena o objeto que está sendo incluido/editado
     private String mensagem = ""; // atributo que armazena mensagens que serão exibidas ao usuario
     private EntityManager em; // objeto que executa as operações de persistência
 
     public AlunoDAO() {
         em = EntityManagerUtil.getEntityManager(); // inicialização da entityManager
     }
-    public boolean validaObjeto(Especialidade obj){
-        // criação do objeto que valida os dados da classe Especialidade
+    public boolean validaObjeto(Aluno obj){
+        // criação do objeto que valida os dados da classe Aluno
         Validator validador = Validation.buildDefaultValidatorFactory().getValidator();
         // armazenando os erros de validação em uma lista
-        Set<ConstraintViolation<Especialidade>> erros = validador.validate(obj);
+        Set<ConstraintViolation<Aluno>> erros = validador.validate(obj);
         if (erros.size() > 0){ // caso caia neste teste o objeto tem erros
             mensagem = ""; // montando a mensagem com os erros para o usuário
             mensagem += "Objeto com erros: <br/>";
-            for (ConstraintViolation<Especialidade> erro : erros){
+            for (ConstraintViolation<Aluno> erro : erros){
                 mensagem += "Erro: "+erro.getMessage()+"<br/>";
             }
             return false;
@@ -44,12 +44,12 @@ public class AlunoDAO implements Serializable{
             return true;
         }
     }
-    public List<Especialidade> getLista(){
+    public List<Aluno> getLista(){
         /// consultando e retornando um entidade persistente        
-        return em.createQuery("from Especialidade order by nome").getResultList();
+        return em.createQuery("from Aluno order by nome").getResultList();
     }
     
-    public boolean salvar(Especialidade obj){
+    public boolean salvar(Aluno obj){
         try {
             em.getTransaction().begin();// inicia uma transação
             if (obj.getId() == null){
@@ -70,7 +70,7 @@ public class AlunoDAO implements Serializable{
         }
     }
     
-    public boolean remover(Especialidade obj){
+    public boolean remover(Aluno obj){
         try {
             em.getTransaction().begin();// inicia uma transação
             em.remove(obj); // removendo o objeto
@@ -87,15 +87,15 @@ public class AlunoDAO implements Serializable{
         }
     } 
     
-    public Especialidade localizar(Integer id){
-        return em.find(Especialidade.class, id);
+    public Aluno localizar(Integer id){
+        return em.find(Aluno.class, id);
     }
 
-    public Especialidade getObjetoSelecionado() {
+    public Aluno getObjetoSelecionado() {
         return objetoSelecionado;
     }
 
-    public void setObjetoSelecionado(Especialidade objetoSelecionado) {
+    public void setObjetoSelecionado(Aluno objetoSelecionado) {
         this.objetoSelecionado = objetoSelecionado;
     }
 

@@ -31,13 +31,13 @@
             </thead>
             <tbody>
                 <%
-                  for(Professor e :professorDAO.getLista() )  {
+                  for(Professor p :professorDAO.getLista() )  {
                 %>  
                 <tr>
-                    <td><%=e.getTitulacao()%></td>
-                    <td><%=e.getTopicosInteresse()%></td>
-                    <td><a href="ServletProfessor?acao=alterar&id=<%=e.getTitulacao()%>">Alterar</a></td>
-                    <td><a href="ServletProfessor?acao=excluir&id=<%=e.getTitulacao()%>">Excluir</a></td>
+                    <td><%=p.getTitulacao()%></td>
+                    <td><%=p.getTopicosInteresse()%></td>
+                    <td><a href="ServletProfessor?acao=alterar&id=<%=p.getTitulacao()%>">Alterar</a></td>
+                    <td><a href="ServletProfessor?acao=excluir&id=<%=p.getTitulacao()%>">Excluir</a></td>
                 </tr>
                 <%
                     }

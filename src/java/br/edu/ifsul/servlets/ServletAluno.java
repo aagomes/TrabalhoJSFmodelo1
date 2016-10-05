@@ -1,7 +1,7 @@
 package br.edu.ifsul.servlets;
 
 import br.edu.ifsul.dao.AlunoDAO;
-import br.edu.ifsul.modelo.Especialidade;
+import br.edu.ifsul.modelo.Aluno;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jorge
  */
-@WebServlet(name = "ServletEspecialidade", urlPatterns = {"/especialidade/ServletEspecialidade"})
+@WebServlet(name = "ServletAluno", urlPatterns = {"/aluno/ServletAluno"})
 public class ServletAluno extends HttpServlet {
 
     /**
@@ -29,7 +29,7 @@ public class ServletAluno extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // capturando o dao da sessao
-        AlunoDAO dao = (AlunoDAO) request.getSession().getAttribute("especialidadeDAO");
+        AlunoDAO dao = (AlunoDAO) request.getSession().getAttribute("alunoDAO");
         if (dao == null){ // caso o dao seja nulo (primeiro acesso) deve inicializa-lo
             dao = new AlunoDAO();
         }
@@ -38,12 +38,12 @@ public class ServletAluno extends HttpServlet {
         if (acao == null){
             tela = "listar.jsp";
         } else if (acao.equals("incluir")){
-            dao.setObjetoSelecionado(new Especialidade());
+            dao.setObjetoSelecionado(new Aluno());
             tela = "formulario.jsp";
         } else if (acao.equals("alterar")){
             // carregar o objeto pelo id
             Integer id = Integer.parseInt(request.getParameter("id"));
-            Especialidade obj = dao.localizar(id);
+            Aluno obj = dao.localizar(id);
             if (obj != null){
                 dao.setObjetoSelecionado(obj);
                 dao.setMensagem("");
@@ -52,7 +52,7 @@ public class ServletAluno extends HttpServlet {
         } else if (acao.equals("excluir")){
             // carregar o objeto pelo id
             Integer id = Integer.parseInt(request.getParameter("id"));
-            Especialidade obj = dao.localizar(id);
+            Aluno obj = dao.localizar(id);
             if (obj != null){
                 dao.remover(obj);
                 tela = "listar.jsp";
@@ -64,7 +64,7 @@ public class ServletAluno extends HttpServlet {
             } catch(Exception e){
                 System.out.println("Erro ao converter o id");
             }
-            Especialidade obj = new Especialidade();
+            Aluno obj = new Aluno();
             obj.setId(id);
             obj.setNome(request.getParameter("nome"));
             dao.setObjetoSelecionado(obj);
@@ -79,7 +79,7 @@ public class ServletAluno extends HttpServlet {
             dao.setMensagem("");
         }
         // atualizar o dao na sessão
-        request.getSession().setAttribute("especialidadeDAO", dao);
+        request.getSession().setAttribute("alunoDAO", dao);
         // redireciona para a tela
         response.sendRedirect(tela);
         
