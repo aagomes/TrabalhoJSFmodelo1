@@ -1,6 +1,7 @@
 package br.edu.ifsul.servlets;
 
 
+import br.edu.ifsul.dao.EspecialidadeDAO;
 import br.edu.ifsul.modelo.Professor;
 import br.edu.ifsul.dao.ProfessorDAO;
 import java.io.IOException;
@@ -71,6 +72,7 @@ public class ServletProfessor extends HttpServlet {
             obj.setId(id);
             obj.setTitulacao(request.getParameter("titulacao"));
             obj.setTopicosInteresse(request.getParameter("topicosInteresse"));
+            
             //obj.setEspecialidade(request.getParameter("especialidade"));
             dao.setObjetoSelecionado(obj);
             if (dao.validaObjeto(obj)){
