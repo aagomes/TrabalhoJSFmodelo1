@@ -1,5 +1,6 @@
 package br.edu.ifsul.servlets;
 
+
 import br.edu.ifsul.modelo.Professor;
 import br.edu.ifsul.dao.ProfessorDAO;
 import java.io.IOException;
@@ -64,10 +65,13 @@ public class ServletProfessor extends HttpServlet {
             } catch(Exception e){
                 System.out.println("Erro ao converter o id");
             }
+
             Professor obj = new Professor();
+
             obj.setId(id);
             obj.setTitulacao(request.getParameter("titulacao"));
             obj.setTopicosInteresse(request.getParameter("topicosInteresse"));
+            //obj.setEspecialidade(request.getParameter("especialidade"));
             dao.setObjetoSelecionado(obj);
             if (dao.validaObjeto(obj)){
                 dao.salvar(obj);
