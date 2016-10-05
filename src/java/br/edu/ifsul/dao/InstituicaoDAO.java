@@ -47,7 +47,7 @@ public class InstituicaoDAO implements Serializable{
     }
     public List<Instituicao> getLista(){
         /// consultando e retornando um entidade persistente        
-        return em.createQuery("from Instituicao order by nome").getResultList();
+        return em.createQuery("from Instituicao order by nome ").getResultList();
     }
     
     public boolean salvar(Instituicao obj){

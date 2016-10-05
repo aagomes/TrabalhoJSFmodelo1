@@ -4,8 +4,8 @@
     Author     : alexandre
 --%>
 
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.edu.ifsul.modelo.Instituicao"%>
 <%@page import="br.edu.ifsul.dao.InstituicaoDAO"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
@@ -35,12 +35,12 @@
             <tbody>
                 <%
                   for(Instituicao e :instituicaoDAO.getLista() )  {
+                      
                 %>  
                 <tr>
                     <td><%=e.getId()%></td>
                     <td><%=e.getNome()%></td>
                     <td><%=e.getAnoFundacao()%></td>
-
                     <td><a href="ServletInstituicao?acao=alterar&id=<%=e.getId()%>">Alterar</a></td>
                     <td><a href="ServletInstituicao?acao=excluir&id=<%=e.getId()%>">Excluir</a></td>
                 </tr>

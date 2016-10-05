@@ -4,6 +4,7 @@
     Author     : alexandre
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="br.edu.ifsul.dao.InstituicaoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="instituicaoDAO" scope="session"
@@ -28,7 +29,7 @@
         <h2>Edição de Instituicao</h2>
         <h2><%=instituicaoDAO.getMensagem()%></h2>
         <form name="form" id="form" action="ServletInstituicao" method="POST">
-
+            <% SimpleDateFormat dateFormat= new SimpleDateFormat("dd/MM/yyyy");%>
             Nome:  <input type="text" name="nome" id="nome"
                            value="<%= instituicaoDAO.getObjetoSelecionado().getNome() == null
                            ? "" : instituicaoDAO.getObjetoSelecionado().getNome() %>"
