@@ -26,6 +26,7 @@
                     <th>Id</th>
                     <th>Titulacao</th>
                     <th>Topicos Interesse</th>
+                    <th>Especialidade</th>
                     <th>Alterar</th>
                     <th>Excluir</th>
                 </tr>
@@ -38,6 +39,7 @@
                     <td><%=p.getId()%></td>
                     <td><%=p.getTitulacao()%></td>
                     <td><%=p.getTopicosInteresse()%></td>
+                    <td><%=p.getEspecialidade()%></td>
                     <td><a href="ServletProfessor?acao=alterar&id=<%=p.getId()%>">Alterar</a></td>
                     <td><a href="ServletProfessor?acao=excluir&id=<%=p.getId()%>">Excluir</a></td>
                 </tr>

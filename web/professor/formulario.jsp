@@ -41,7 +41,8 @@
                            value="<%= professorDAO.getObjetoSelecionado().getTopicosInteresse()== null
                            ? "" : professorDAO.getObjetoSelecionado().getTopicosInteresse() %>"
                            size="80" /><br/>
-            Especialidade:  <br/>
+            Especialidade:  <input type="text" name="especialidade" id="especialidade"
+                           value=2 size="10" /><br/><br/>
         </div>
             <input type="button" value="Salvar" name="btnSalvar" onclick="doSalvar()"/> 
             <input type="button" value="Cancelar" name="btnCancelar" onclick="doCancelar()"/>

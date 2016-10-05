@@ -35,6 +35,10 @@ public class ServletProfessor extends HttpServlet {
         if (dao == null){ // caso o dao seja nulo (primeiro acesso) deve inicializa-lo
             dao = new ProfessorDAO();
         }
+        EspecialidadeDAO especialidadeDAO = (EspecialidadeDAO) request.getSession().getAttribute("especialidadeDAO");
+        if (especialidadeDAO == null){ // caso o dao seja nulo (primeiro acesso) deve inicializa-lo
+            especialidadeDAO = new EspecialidadeDAO();
+        }
         String tela = ""; // atributo que ira conter a tela que será direcionada
         String acao = request.getParameter("acao"); // ação solicitada
         if (acao == null){
@@ -66,13 +70,18 @@ public class ServletProfessor extends HttpServlet {
             } catch(Exception e){
                 System.out.println("Erro ao converter o id");
             }
+            Integer espID = null;
+            try {
+                espID = Integer.parseInt(request.getParameter("id"));
+            } catch(Exception e){
+                System.out.println("Erro ao converter o id");
+            }
 
             Professor obj = new Professor();
-
+            
             obj.setId(id);
             obj.setTitulacao(request.getParameter("titulacao"));
             obj.setTopicosInteresse(request.getParameter("topicosInteresse"));
-            
             //obj.setEspecialidade(request.getParameter("especialidade"));
             dao.setObjetoSelecionado(obj);
             if (dao.validaObjeto(obj)){
