@@ -1,6 +1,6 @@
 package br.edu.ifsul.servlets;
 
-import br.edu.ifsul.dao.EspecialidadeDAO;
+import br.edu.ifsul.dao.AlunoDAO;
 import br.edu.ifsul.modelo.Especialidade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author jorge
  */
 @WebServlet(name = "ServletEspecialidade", urlPatterns = {"/especialidade/ServletEspecialidade"})
-public class ServletEspecialidade extends HttpServlet {
+public class ServletAluno extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,9 +29,9 @@ public class ServletEspecialidade extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // capturando o dao da sessao
-        EspecialidadeDAO dao = (EspecialidadeDAO) request.getSession().getAttribute("especialidadeDAO");
+        AlunoDAO dao = (AlunoDAO) request.getSession().getAttribute("especialidadeDAO");
         if (dao == null){ // caso o dao seja nulo (primeiro acesso) deve inicializa-lo
-            dao = new EspecialidadeDAO();
+            dao = new AlunoDAO();
         }
         String tela = ""; // atributo que ira conter a tela que será direcionada
         String acao = request.getParameter("acao"); // ação solicitada
